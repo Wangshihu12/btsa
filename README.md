@@ -244,9 +244,7 @@ Special thanks to the authors of ECMD, UrbanNav, GEODE, and Helimos datasets for
 
 ---
 
-## :page_facing_up: License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
