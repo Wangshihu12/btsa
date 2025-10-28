@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**[Paper (arXiv)](https://arxiv.org/) | [Paper (IEEE Xplore)](https://ieeexplore.ieee.org/) | [Video](doc/Multimedia.mp4) | [Dataset](https://drive.google.com/drive/folders/1-HeXGPzK4I_z7q5YBMP0S9vPI0XF5hT3?usp=sharing)**
+**[Paper (arXiv)](https://arxiv.org/abs/2510.22313v1) | [Paper (IEEE Xplore)](https://ieeexplore.ieee.org/abstract/document/11207655/) | [Video](doc/Multimedia.mp4) | [Dataset](https://drive.google.com/drive/folders/1-HeXGPzK4I_z7q5YBMP0S9vPI0XF5hT3?usp=sharing)**
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![ROS](https://img.shields.io/badge/ROS-Noetic-blue)](http://wiki.ros.org/noetic)
