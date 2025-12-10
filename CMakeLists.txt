@@ -76,6 +76,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 find_package(Eigen3 REQUIRED)
 find_package(PCL 1.8 REQUIRED)
+find_package(TBB REQUIRED)
 #find_package(GTSAM REQUIRED QUIET)
 
 message(Eigen: ${EIGEN3_INCLUDE_DIR})
@@ -104,7 +105,7 @@ catkin_package(
 )
 
 add_executable(btsa_node src/voxelMapping.cpp src/preprocess.cpp)
-target_link_libraries(btsa_node ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${PYTHON_LIBRARIES} ${LOG_LIB})
+target_link_libraries(btsa_node ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${PYTHON_LIBRARIES} ${LOG_LIB} TBB::tbb)
 target_include_directories(btsa_node PRIVATE ${PYTHON_INCLUDE_DIRS})
 
 add_executable(pandar_to_velodyne src/converter/pandar_to_velodyne.cpp)

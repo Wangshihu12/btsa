@@ -16,7 +16,7 @@
     </group>
 
     <!-- run bag -->
-    <arg name="bag_file_use" default="true" />
+    <arg name="bag_file_use" default="false" />
     <arg name="bag_file" default="/media/shigezhuti/SATA1/btsa/scan/dynamic/Promenade03.bag" />
 
     <param name="use_sim_time" value="false" />

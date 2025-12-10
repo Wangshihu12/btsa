@@ -312,7 +312,11 @@ void SpatialConsistencyCheck(){
         if (dimensions[2] / dimensions[1] >= 10.0) continue;
 
 
-        PointType cluster_center_point(obj.state[0], obj.state[1], obj.state[2]);
+        // 创建聚类中心点，PointXYZINormal 没有带参数的构造函数，需要分别赋值
+        PointType cluster_center_point;
+        cluster_center_point.x = obj.state[0];
+        cluster_center_point.y = obj.state[1];
+        cluster_center_point.z = obj.state[2];
         Eigen::Vector3f cluster_scale = cluster_max.cast<float>() - cluster_min.cast<float>();
         float diagonal = (cluster_max - cluster_min).norm() / 2;
 
@@ -571,6 +575,15 @@ void imu_cbk(const sensor_msgs::Imu::ConstPtr &msg_in)
     publish_count ++;
     // cout<<"IMU got at: "<<msg_in->header.stamp.toSec()<<endl;
     sensor_msgs::Imu::Ptr msg(new sensor_msgs::Imu(*msg_in));
+
+    if (true)
+    {
+        // imu 角速度 加速度矫正
+        msg->angular_velocity.x = msg_in->angular_velocity.y;
+        msg->angular_velocity.y = msg_in->angular_velocity.x;
+        msg->linear_acceleration.x = msg_in->linear_acceleration.y;
+        msg->linear_acceleration.y = msg_in->linear_acceleration.x;
+    }
 
     if (abs(timediff_lidar_wrt_imu) > 0.1 && time_sync_en)
     {
