@@ -54,7 +54,7 @@
 #include <tf/transform_datatypes.h>
 #include <tf/transform_broadcaster.h>
 #include <geometry_msgs/Vector3.h>
-#include <livox_ros_driver/CustomMsg.h>
+#include <livox_ros_driver2/CustomMsg.h>
 #include "preprocess.h"
 #include "voxel_map_util.hpp"
 #include "scan/ikd_Tree_impl.h"
@@ -536,7 +536,7 @@ void standard_pcl_cbk(const sensor_msgs::PointCloud2::ConstPtr &msg)
 
 double timediff_lidar_wrt_imu = 0.0;
 bool   timediff_set_flg = false;
-void livox_pcl_cbk(const livox_ros_driver::CustomMsg::ConstPtr &msg)
+void livox_pcl_cbk(const livox_ros_driver2::CustomMsg::ConstPtr &msg)
 {
     mtx_buffer.lock();
     double preprocess_start_time = omp_get_wtime();
@@ -1276,6 +1276,14 @@ int main(int argc, char** argv)
                               max_points_size, max_points_size, min_eigen_value,
                               voxel_map);
                 std::cout << "build voxel map" << std::endl;
+
+                // 初始化 ikdtree，避免后续 observation_model_share 中访问未初始化的 ikdtree 导致段错误
+                if(ikdtree.Root_Node == nullptr){
+                    if(world_lidar->size() > 5){
+                        ikdtree.set_downsample_param(filter_size_map_min);
+                        ikdtree.Build(world_lidar->points);
+                    }
+                }
 
                 if (publish_voxel_map) {
                     pubVoxelMap(voxel_map, publish_max_voxel_layer, voxel_map_pub);
